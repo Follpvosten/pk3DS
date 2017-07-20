@@ -1,5 +1,4 @@
-﻿using pk3DS.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -578,7 +577,7 @@ namespace pk3DS.ARCUtil
                 //if (dr != DialogResult.Yes) 
                 return;
             }
-            Util.Alert("Not finished.");
+            WinFormsUtil.Alert("Not finished.");
         }
 
         // Generic Utility

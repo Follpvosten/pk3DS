@@ -151,15 +151,15 @@ namespace pk3DS
         private readonly byte[][] trclass;
         private readonly byte[][] trdata;
         private readonly byte[][] trpoke;
-        private readonly string[] abilitylist = Main.getText(TextName.AbilityNames);
-        private readonly string[] movelist = Main.getText(TextName.MoveNames);
-        private readonly string[] itemlist = Main.getText(TextName.ItemNames);
-        private readonly string[] specieslist = Main.getText(TextName.SpeciesNames);
-        private readonly string[] types = Main.getText(TextName.Types);
-        private readonly string[] forms = Main.getText(TextName.Forms);
-        private string[] trName = Main.getText(TextName.TrainerNames);
-        private readonly string[] trClass = Main.getText(TextName.TrainerClasses);
-        private readonly string[] trText = Main.getText(TextName.TrainerText);
+        private readonly string[] abilitylist = Main.Config.getText(TextName.AbilityNames);
+        private readonly string[] movelist = Main.Config.getText(TextName.MoveNames);
+        private readonly string[] itemlist = Main.Config.getText(TextName.ItemNames);
+        private readonly string[] specieslist = Main.Config.getText(TextName.SpeciesNames);
+        private readonly string[] types = Main.Config.getText(TextName.Types);
+        private readonly string[] forms = Main.Config.getText(TextName.Forms);
+        private string[] trName = Main.Config.getText(TextName.TrainerNames);
+        private readonly string[] trClass = Main.Config.getText(TextName.TrainerClasses);
+        private readonly string[] trText = Main.Config.getText(TextName.TrainerText);
         #endregion
 
         // Ability Loading
@@ -207,12 +207,12 @@ namespace pk3DS
                     trpk_IV[i].Enabled =
                     trpk_lvl[i].Enabled = i < pkm;
 
-                    trpk_item[i].Enabled = (i < pkm) && checkBox_Item.Checked;
+                    trpk_item[i].Enabled = i < pkm && checkBox_Item.Checked;
 
                     trpk_m1[i].Enabled =
                     trpk_m2[i].Enabled =
                     trpk_m3[i].Enabled =
-                    trpk_m4[i].Enabled = (i < pkm) && checkBox_Moves.Checked;
+                    trpk_m4[i].Enabled = i < pkm && checkBox_Moves.Checked;
 
                     if (!trpk_pkm[i].Enabled)
                     {
@@ -418,8 +418,8 @@ namespace pk3DS
         {
             if (tr == null || randomizing) return;
             if (i >= tr.Team.Length) { pba[i].Image = null; return; }
-            Bitmap rawImg = Util.getSprite(tr.Team[i].Species, tr.Team[i].Form, tr.Team[i].Gender, tr.Team[i].Item, Main.Config);
-            pba[i].Image = Util.scaleImage(rawImg, 2);
+            Bitmap rawImg = WinFormsUtil.getSprite(tr.Team[i].Species, tr.Team[i].Form, tr.Team[i].Gender, tr.Team[i].Item, Main.Config);
+            pba[i].Image = WinFormsUtil.scaleImage(rawImg, 2);
         }
         private void showText()
         {
@@ -431,7 +431,7 @@ namespace pk3DS
         private void Setup()
         {
             start = true;
-            string[] species = Main.getText(TextName.SpeciesNames);
+            string[] species = Main.Config.getText(TextName.SpeciesNames);
             AltForms = Main.Config.Personal.getFormList(species, Main.Config.MaxSpeciesID);
 
             Array.Resize(ref trName, trdata.Length);
@@ -533,7 +533,7 @@ namespace pk3DS
         private readonly List<string> Tags = new List<string>();
         private readonly Dictionary<string, int> TagTypes = new Dictionary<string, int>();
         public static int[] sL; // Random Species List
-        public static decimal rGiftPercent, rLevelPercent;
+        public static decimal rGiftPercent, rLevelMultiplier;
         private void B_Randomize_Click(object sender, EventArgs e)
         {
             rPKM = rMove = rAbility = rDiffAI = rDiffIV = rClass = rGift = rItem = rDoRand = false; // init to false
@@ -559,7 +559,8 @@ namespace pk3DS
             if (rEnsureMEvo.Length > 0)
             {
                 if (mEvoTypes.Length < 13 && rTypeTheme)
-                { Util.Alert("There are insufficient Types with at least one mega evolution to Guarantee story Mega Evos while keeping Type theming.", 
+                {
+                    WinFormsUtil.Alert("There are insufficient Types with at least one mega evolution to Guarantee story Mega Evos while keeping Type theming.", 
                     "Re-Randomize Personal or don't choose both options."); return; }
                 GymE4Types.AddRange(mEvoTypes);
             }
@@ -600,7 +601,7 @@ namespace pk3DS
                 CB_TrainerID.SelectedIndex = i; // data is loaded
 
                 // Setup
-                checkBox_Moves.Checked = rMove || (!rNoMove && checkBox_Moves.Checked);
+                checkBox_Moves.Checked = rMove || !rNoMove && checkBox_Moves.Checked;
                 checkBox_Item.Checked = rItem || checkBox_Item.Checked;
 
                 if (r6PKM && rImportant[i] != null) // skip the first rival battles
@@ -663,7 +664,7 @@ namespace pk3DS
                 int type = GetRandomType(i);
                 bool mevo = rEnsureMEvo.Contains(i);
                 bool typerand = rTypeTheme && !rGymE4Only ||
-                                (rTypeTheme && rImportant[i] != null && (rImportant[i].Contains("GYM") || rImportant[i].Contains("ELITE") || rImportant[i].Contains("CHAMPION")));
+                                rTypeTheme && rImportant[i] != null && (rImportant[i].Contains("GYM") || rImportant[i].Contains("ELITE") || rImportant[i].Contains("CHAMPION"));
 
                 // Randomize Pokemon
                 for (int p = 0; p < CB_numPokemon.SelectedIndex; p++)
@@ -678,13 +679,13 @@ namespace pk3DS
                         if (typerand)
                         {
                             int tries = 0;
-                            while (((pkm.Types[0] != type && pkm.Types[1] != type) || mevo && p == CB_numPokemon.SelectedIndex - 1 && !megaEvos.Contains(species)) && tries < 0x10000)
+                            while ((pkm.Types[0] != type && pkm.Types[1] != type || mevo && p == CB_numPokemon.SelectedIndex - 1 && !megaEvos.Contains(species)) && tries < 0x10000)
                                 if (p == CB_numPokemon.SelectedIndex - 1 && mevo)
                                     pkm = Main.SpeciesStat[species = GetRandomMegaEvolvablePokemon(type)];
                                 else if (rSmart) // Get a new Pokemon with a close BST
                                 {
                                     pkm = Main.SpeciesStat[species = Randomizer.getRandomSpecies(ref sL, ref ctr)];
-                                    while (!((pkm.BST * (5 - ++tries / Main.Config.MaxSpeciesID) / 6 < oldpkm.BST) && pkm.BST * (6 + ++tries / Main.Config.MaxSpeciesID) / 5 > oldpkm.BST))
+                                    while (!(pkm.BST * (5 - ++tries / Main.Config.MaxSpeciesID) / 6 < oldpkm.BST && pkm.BST * (6 + ++tries / Main.Config.MaxSpeciesID) / 5 > oldpkm.BST))
                                     {
                                         pkm = Main.SpeciesStat[species = Randomizer.getRandomSpecies(ref sL, ref ctr)];
                                     }
@@ -697,7 +698,7 @@ namespace pk3DS
                         else if (rSmart) // Get a new Pokemon with a close BST
                         {
                             int tries = 0;
-                            while (!((pkm.BST * (5 - ++tries / Main.Config.MaxSpeciesID) / 6 < oldpkm.BST) && pkm.BST * (6 + ++tries / Main.Config.MaxSpeciesID) / 5 > oldpkm.BST))
+                            while (!(pkm.BST * (5 - ++tries / Main.Config.MaxSpeciesID) / 6 < oldpkm.BST && pkm.BST * (6 + ++tries / Main.Config.MaxSpeciesID) / 5 > oldpkm.BST))
                             {
                                 pkm = Main.SpeciesStat[species = Randomizer.getRandomSpecies(ref sL, ref ctr)];
                             }
@@ -714,7 +715,7 @@ namespace pk3DS
                             trpk_form[p].SelectedIndex = (int)(rnd32() % trpk_form[p].Items.Count);
                     }
                     if (rLevel)
-                        trpk_lvl[p].SelectedIndex = Math.Max(1, Math.Min((int)(trpk_lvl[p].SelectedIndex * (100 + rLevelPercent) / 100), 100));
+                        trpk_lvl[p].SelectedIndex = Randomizer.getModifiedLevel(trpk_lvl[p].SelectedIndex, rLevelMultiplier);
                     if (rAbility)
                         trpk_abil[p].SelectedIndex = (int)(1 + rnd32() % 3);
                     if (rDiffIV)
@@ -770,7 +771,7 @@ namespace pk3DS
             }
             randomizing = false;
             CB_TrainerID.SelectedIndex = 1;
-            Util.Alert("Randomized all trainers according to specification!", "Press the Dump to TXT to view the new trainer information!");
+            WinFormsUtil.Alert("Randomized all Trainers according to specification!", "Press the Dump to .TXT button to view the new Trainer information!");
         }
 
         private string[] GetTagsORAS()
@@ -1025,7 +1026,7 @@ namespace pk3DS
                     MEvoTypes.Add(Main.SpeciesStat[spec].Types[1]);
             }
             MEvoTypes.Sort();
-            Console.WriteLine("There are " + MEvoTypes.Count + " Types capable of mega evolution.");
+            Console.WriteLine("There are " + MEvoTypes.Count + " Types capable of Mega Evolution.");
             return MEvoTypes.ToArray();
         }
         private int GetRandomMegaEvolvablePokemon(int type)

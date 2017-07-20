@@ -1,10 +1,4 @@
-﻿using pk3DS.Core;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -36,7 +30,7 @@ namespace pk3DS
 
         public ErrorWindow(string lang) : this()
         {
-            Util.TranslateInterface(this, lang);
+            WinFormsUtil.TranslateInterface(this, lang);
         }
 
         /// <summary>

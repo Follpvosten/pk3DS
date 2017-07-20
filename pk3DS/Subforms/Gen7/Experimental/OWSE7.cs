@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using pk3DS.Core;
-using pk3DS.Core.Structures.Gen6;
 using pk3DS.Core.CTR;
 using pk3DS.Core.Structures.Gen7;
 
@@ -19,7 +18,7 @@ namespace pk3DS
             ZoneData = zd;
             WorldData = wd;
 
-            locationList = Main.getText(TextName.metlist_000000);
+            locationList = Main.Config.getText(TextName.metlist_000000);
             locationList = SMWE.getGoodLocationList(locationList);
 
             InitializeComponent();

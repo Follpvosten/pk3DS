@@ -1,5 +1,4 @@
-﻿using pk3DS.Core;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -105,11 +104,11 @@ namespace pk3DS
                 if (!patchExeFS(ExeFS, garcPaths, newPaths, oldROM, newROM, ref result, Path.Combine(patchFolder, ".code.bin")))
                     throw new Exception(result);
 
-                Util.Alert("Patch contents saved to:" + Environment.NewLine + exportGARCs(garcPaths, newPaths, Main.RomFSPath, patchFolder), result);
+                WinFormsUtil.Alert("Patch contents saved to:" + Environment.NewLine + exportGARCs(garcPaths, newPaths, Main.RomFSPath, patchFolder), result);
             }
             catch (Exception ex)
-            { 
-                Util.Error("Could not create patch:", ex.ToString());
+            {
+                WinFormsUtil.Error("Could not create patch:", ex.ToString());
                 if (Directory.Exists(patchFolder)) Directory.Delete(patchFolder, true);
             }
         }
@@ -133,7 +132,7 @@ namespace pk3DS
             bool languages = CHK_Lang.Checked;
             StringCollection paths = new StringCollection();
             foreach (string s in sc)
-                if (!languages || (s != "gametext" && s != "storytext"))
+                if (!languages || s != "gametext" && s != "storytext")
                     paths.Add(Main.getGARCFileName(s, Main.Language));
                 else
                     for (int l = 0; l < 8; l++)

@@ -1344,7 +1344,7 @@
             this.B_CurrentAttack.Name = "B_CurrentAttack";
             this.B_CurrentAttack.Size = new System.Drawing.Size(93, 40);
             this.B_CurrentAttack.TabIndex = 449;
-            this.B_CurrentAttack.Text = "Current Level Levelups";
+            this.B_CurrentAttack.Text = "Current Level Levelup Moves";
             this.B_CurrentAttack.UseVisualStyleBackColor = true;
             this.B_CurrentAttack.Click += new System.EventHandler(this.B_CurrentAttack_Click);
             // 
@@ -1354,7 +1354,7 @@
             this.B_HighAttack.Name = "B_HighAttack";
             this.B_HighAttack.Size = new System.Drawing.Size(93, 40);
             this.B_HighAttack.TabIndex = 448;
-            this.B_HighAttack.Text = "High Attacking Levelups";
+            this.B_HighAttack.Text = "High Attacking Levelup Moves";
             this.B_HighAttack.UseVisualStyleBackColor = true;
             this.B_HighAttack.Click += new System.EventHandler(this.B_HighAttack_Click);
             // 
@@ -1599,7 +1599,7 @@
             // L_ShinyPCT
             // 
             this.L_ShinyPCT.AutoSize = true;
-            this.L_ShinyPCT.Location = new System.Drawing.Point(276, 55);
+            this.L_ShinyPCT.Location = new System.Drawing.Point(276, 57);
             this.L_ShinyPCT.Name = "L_ShinyPCT";
             this.L_ShinyPCT.Size = new System.Drawing.Size(15, 13);
             this.L_ShinyPCT.TabIndex = 305;
@@ -1607,7 +1607,7 @@
             // 
             // NUD_Shiny
             // 
-            this.NUD_Shiny.Location = new System.Drawing.Point(232, 51);
+            this.NUD_Shiny.Location = new System.Drawing.Point(232, 53);
             this.NUD_Shiny.Name = "NUD_Shiny";
             this.NUD_Shiny.Size = new System.Drawing.Size(43, 20);
             this.NUD_Shiny.TabIndex = 304;
@@ -1622,7 +1622,7 @@
             this.CHK_RandomShiny.AutoSize = true;
             this.CHK_RandomShiny.Checked = true;
             this.CHK_RandomShiny.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_RandomShiny.Location = new System.Drawing.Point(100, 52);
+            this.CHK_RandomShiny.Location = new System.Drawing.Point(100, 54);
             this.CHK_RandomShiny.Name = "CHK_RandomShiny";
             this.CHK_RandomShiny.Size = new System.Drawing.Size(103, 17);
             this.CHK_RandomShiny.TabIndex = 303;
@@ -1635,7 +1635,7 @@
             this.CHK_E.AutoSize = true;
             this.CHK_E.Checked = true;
             this.CHK_E.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_E.Location = new System.Drawing.Point(6, 115);
+            this.CHK_E.Location = new System.Drawing.Point(6, 117);
             this.CHK_E.Name = "CHK_E";
             this.CHK_E.Size = new System.Drawing.Size(98, 17);
             this.CHK_E.TabIndex = 296;
@@ -1647,7 +1647,7 @@
             this.CHK_L.AutoSize = true;
             this.CHK_L.Checked = true;
             this.CHK_L.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_L.Location = new System.Drawing.Point(6, 101);
+            this.CHK_L.Location = new System.Drawing.Point(6, 103);
             this.CHK_L.Name = "CHK_L";
             this.CHK_L.Size = new System.Drawing.Size(98, 17);
             this.CHK_L.TabIndex = 295;
@@ -1659,7 +1659,7 @@
             this.CHK_G7.AutoSize = true;
             this.CHK_G7.Checked = true;
             this.CHK_G7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G7.Location = new System.Drawing.Point(6, 87);
+            this.CHK_G7.Location = new System.Drawing.Point(6, 89);
             this.CHK_G7.Name = "CHK_G7";
             this.CHK_G7.Size = new System.Drawing.Size(55, 17);
             this.CHK_G7.TabIndex = 298;
@@ -1671,7 +1671,7 @@
             this.CHK_G6.AutoSize = true;
             this.CHK_G6.Checked = true;
             this.CHK_G6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G6.Location = new System.Drawing.Point(6, 73);
+            this.CHK_G6.Location = new System.Drawing.Point(6, 75);
             this.CHK_G6.Name = "CHK_G6";
             this.CHK_G6.Size = new System.Drawing.Size(55, 17);
             this.CHK_G6.TabIndex = 294;
@@ -1683,7 +1683,7 @@
             this.CHK_G5.AutoSize = true;
             this.CHK_G5.Checked = true;
             this.CHK_G5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G5.Location = new System.Drawing.Point(6, 59);
+            this.CHK_G5.Location = new System.Drawing.Point(6, 61);
             this.CHK_G5.Name = "CHK_G5";
             this.CHK_G5.Size = new System.Drawing.Size(55, 17);
             this.CHK_G5.TabIndex = 293;
@@ -1695,7 +1695,7 @@
             this.CHK_G4.AutoSize = true;
             this.CHK_G4.Checked = true;
             this.CHK_G4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G4.Location = new System.Drawing.Point(6, 45);
+            this.CHK_G4.Location = new System.Drawing.Point(6, 47);
             this.CHK_G4.Name = "CHK_G4";
             this.CHK_G4.Size = new System.Drawing.Size(55, 17);
             this.CHK_G4.TabIndex = 292;
@@ -1707,7 +1707,7 @@
             this.CHK_G3.AutoSize = true;
             this.CHK_G3.Checked = true;
             this.CHK_G3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G3.Location = new System.Drawing.Point(6, 31);
+            this.CHK_G3.Location = new System.Drawing.Point(6, 33);
             this.CHK_G3.Name = "CHK_G3";
             this.CHK_G3.Size = new System.Drawing.Size(55, 17);
             this.CHK_G3.TabIndex = 291;
@@ -1717,17 +1717,23 @@
             // NUD_LevelBoost
             // 
             this.NUD_LevelBoost.DecimalPlaces = 2;
+            this.NUD_LevelBoost.Enabled = false;
             this.NUD_LevelBoost.Increment = new decimal(new int[] {
             5,
             0,
             0,
             131072});
-            this.NUD_LevelBoost.Location = new System.Drawing.Point(232, 75);
+            this.NUD_LevelBoost.Location = new System.Drawing.Point(232, 77);
             this.NUD_LevelBoost.Maximum = new decimal(new int[] {
             3,
             0,
             0,
             0});
+            this.NUD_LevelBoost.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NUD_LevelBoost.Name = "NUD_LevelBoost";
             this.NUD_LevelBoost.Size = new System.Drawing.Size(43, 20);
             this.NUD_LevelBoost.TabIndex = 301;
@@ -1742,7 +1748,7 @@
             this.CHK_G2.AutoSize = true;
             this.CHK_G2.Checked = true;
             this.CHK_G2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G2.Location = new System.Drawing.Point(6, 17);
+            this.CHK_G2.Location = new System.Drawing.Point(6, 19);
             this.CHK_G2.Name = "CHK_G2";
             this.CHK_G2.Size = new System.Drawing.Size(55, 17);
             this.CHK_G2.TabIndex = 290;
@@ -1752,9 +1758,7 @@
             // CHK_Level
             // 
             this.CHK_Level.AutoSize = true;
-            this.CHK_Level.Checked = true;
-            this.CHK_Level.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_Level.Location = new System.Drawing.Point(100, 76);
+            this.CHK_Level.Location = new System.Drawing.Point(100, 78);
             this.CHK_Level.Name = "CHK_Level";
             this.CHK_Level.Size = new System.Drawing.Size(130, 17);
             this.CHK_Level.TabIndex = 300;
@@ -1767,7 +1771,7 @@
             this.CHK_G1.AutoSize = true;
             this.CHK_G1.Checked = true;
             this.CHK_G1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_G1.Location = new System.Drawing.Point(6, 3);
+            this.CHK_G1.Location = new System.Drawing.Point(6, 5);
             this.CHK_G1.Name = "CHK_G1";
             this.CHK_G1.Size = new System.Drawing.Size(55, 17);
             this.CHK_G1.TabIndex = 289;
@@ -1777,9 +1781,7 @@
             // CHK_BST
             // 
             this.CHK_BST.AutoSize = true;
-            this.CHK_BST.Checked = true;
-            this.CHK_BST.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_BST.Location = new System.Drawing.Point(100, 17);
+            this.CHK_BST.Location = new System.Drawing.Point(100, 19);
             this.CHK_BST.Name = "CHK_BST";
             this.CHK_BST.Size = new System.Drawing.Size(117, 17);
             this.CHK_BST.TabIndex = 297;
@@ -1791,11 +1793,11 @@
             this.CHK_RandomPKM.AutoSize = true;
             this.CHK_RandomPKM.Checked = true;
             this.CHK_RandomPKM.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_RandomPKM.Location = new System.Drawing.Point(100, 3);
+            this.CHK_RandomPKM.Location = new System.Drawing.Point(100, 5);
             this.CHK_RandomPKM.Name = "CHK_RandomPKM";
             this.CHK_RandomPKM.Size = new System.Drawing.Size(114, 17);
             this.CHK_RandomPKM.TabIndex = 299;
-            this.CHK_RandomPKM.Text = "Random Pokemon";
+            this.CHK_RandomPKM.Text = "Random Pokémon";
             this.CHK_RandomPKM.UseVisualStyleBackColor = true;
             this.CHK_RandomPKM.CheckedChanged += new System.EventHandler(this.CHK_RandomPKM_CheckedChanged);
             // 
@@ -1897,9 +1899,9 @@
             this.CHK_RandomAbilities.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_RandomAbilities.Location = new System.Drawing.Point(6, 87);
             this.CHK_RandomAbilities.Name = "CHK_RandomAbilities";
-            this.CHK_RandomAbilities.Size = new System.Drawing.Size(104, 17);
+            this.CHK_RandomAbilities.Size = new System.Drawing.Size(193, 17);
             this.CHK_RandomAbilities.TabIndex = 331;
-            this.CHK_RandomAbilities.Text = "Random Abilities";
+            this.CHK_RandomAbilities.Text = "Random Abilities (Including Hidden)";
             this.CHK_RandomAbilities.UseVisualStyleBackColor = true;
             // 
             // NUD_STAB
@@ -2044,11 +2046,11 @@
             // 
             this.CHK_RandomMegaForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CHK_RandomMegaForm.AutoSize = true;
-            this.CHK_RandomMegaForm.Location = new System.Drawing.Point(6, 55);
+            this.CHK_RandomMegaForm.Location = new System.Drawing.Point(6, 68);
             this.CHK_RandomMegaForm.Name = "CHK_RandomMegaForm";
-            this.CHK_RandomMegaForm.Size = new System.Drawing.Size(103, 30);
+            this.CHK_RandomMegaForm.Size = new System.Drawing.Size(127, 17);
             this.CHK_RandomMegaForm.TabIndex = 333;
-            this.CHK_RandomMegaForm.Text = "Allow RandForm\r\nfor Mega PKM";
+            this.CHK_RandomMegaForm.Text = "Random Mega Forms";
             this.CHK_RandomMegaForm.UseVisualStyleBackColor = true;
             // 
             // CHK_TypeTheme
@@ -2057,7 +2059,7 @@
             this.CHK_TypeTheme.AutoSize = true;
             this.CHK_TypeTheme.Checked = true;
             this.CHK_TypeTheme.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_TypeTheme.Location = new System.Drawing.Point(6, 32);
+            this.CHK_TypeTheme.Location = new System.Drawing.Point(6, 33);
             this.CHK_TypeTheme.Name = "CHK_TypeTheme";
             this.CHK_TypeTheme.Size = new System.Drawing.Size(127, 17);
             this.CHK_TypeTheme.TabIndex = 329;
@@ -2070,7 +2072,7 @@
             this.CHK_IgnoreSpecialClass.AutoSize = true;
             this.CHK_IgnoreSpecialClass.Checked = true;
             this.CHK_IgnoreSpecialClass.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_IgnoreSpecialClass.Location = new System.Drawing.Point(6, 17);
+            this.CHK_IgnoreSpecialClass.Location = new System.Drawing.Point(6, 18);
             this.CHK_IgnoreSpecialClass.Name = "CHK_IgnoreSpecialClass";
             this.CHK_IgnoreSpecialClass.Size = new System.Drawing.Size(133, 17);
             this.CHK_IgnoreSpecialClass.TabIndex = 327;

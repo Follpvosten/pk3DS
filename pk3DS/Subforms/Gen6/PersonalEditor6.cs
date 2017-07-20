@@ -4,7 +4,6 @@ using System.IO;
 using System.Media;
 using System.Text;
 using System.Windows.Forms;
-using pk3DS.Properties;
 using pk3DS.Core.Structures.PersonalInfo;
 using pk3DS.Core;
 
@@ -24,11 +23,11 @@ namespace pk3DS
             rstat_boxes = new[] { CHK_rHP, CHK_rATK, CHK_rDEF, CHK_rSPA, CHK_rSPD, CHK_rSPE };
             files = infiles;
 
-            abilities = Main.getText(TextName.AbilityNames);
-            moves = Main.getText(TextName.MoveNames);
-            items = Main.getText(TextName.ItemNames);
-            species = Main.getText(TextName.SpeciesNames);
-            types = Main.getText(TextName.Types);
+            abilities = Main.Config.getText(TextName.AbilityNames);
+            moves = Main.Config.getText(TextName.MoveNames);
+            items = Main.Config.getText(TextName.ItemNames);
+            species = Main.Config.getText(TextName.SpeciesNames);
+            types = Main.Config.getText(TextName.Types);
             species[0] = "---";
             abilities[0] = items[0] = moves[0] = "";
             string[][] AltForms = Main.Config.Personal.getFormList(species, Main.Config.MaxSpeciesID);
@@ -256,10 +255,7 @@ namespace pk3DS
             int f = formVal[entry];
             if (entry <= Main.Config.MaxSpeciesID)
                 s = entry;
-            int[] specForm = { s, f };
-            string filename = "_" + specForm[0] + (CB_Species.SelectedIndex > 721 ? "_" + (specForm[1] + 1) : "");
-            Bitmap rawImg = (Bitmap)Resources.ResourceManager.GetObject(filename);
-            if (rawImg == null) rawImg = Core.Properties.Resources.unknown;
+            Bitmap rawImg = WinFormsUtil.getSprite(s, f, 0, 0, Main.Config);
             Bitmap bigImg = new Bitmap(rawImg.Width * 2, rawImg.Height * 2);
             for (int x = 0; x < rawImg.Width; x++)
             {
@@ -432,7 +428,7 @@ namespace pk3DS
                 }
             }
             saveEntry();
-            Util.Alert("All relevant Pokemon Personal Entries have been randomized!");
+            WinFormsUtil.Alert("All relevant Pokemon Personal Entries have been randomized!");
         }
         private void B_ModifyAll(object sender, EventArgs e)
         {
@@ -454,13 +450,13 @@ namespace pk3DS
                     TB_CatchRate.Text = ((int)NUD_CatchRateMod.Value).ToString();
             }
             CB_Species.SelectedIndex = 1;
-            Util.Alert("All species modified to specification!");
+            WinFormsUtil.Alert("All species modified according to specification!");
         }
         private bool dumping;
         private void B_Dump_Click(object sender, EventArgs e)
         {
 
-            if (DialogResult.Yes != Util.Prompt(MessageBoxButtons.YesNo, "Dump all Personal Entries to Text File?"))
+            if (DialogResult.Yes != WinFormsUtil.Prompt(MessageBoxButtons.YesNo, "Dump all Personal Entries to Text File?"))
                 return;
 
             dumping = true;

@@ -10,12 +10,12 @@ namespace pk3DS
         public MartEditor6()
         {
             InitializeComponent();
-            if (Main.ExeFSPath == null) { Util.Alert("No exeFS code to load."); Close(); }
+            if (Main.ExeFSPath == null) { WinFormsUtil.Alert("No exeFS code to load."); Close(); }
             string[] files = Directory.GetFiles(Main.ExeFSPath);
-            if (!File.Exists(files[0]) || !Path.GetFileNameWithoutExtension(files[0]).Contains("code")) { Util.Alert("No .code.bin detected."); Close(); }
+            if (!File.Exists(files[0]) || !Path.GetFileNameWithoutExtension(files[0]).Contains("code")) { WinFormsUtil.Alert("No .code.bin detected."); Close(); }
             data = File.ReadAllBytes(files[0]);
-            if (data.Length % 0x200 != 0) { Util.Alert(".code.bin not decompressed. Aborting."); Close(); }
-            offset = Util.IndexOfBytes(data, new byte[] { 0x00, 0x72, 0x6F, 0x6D, 0x3A, 0x2F, 0x44, 0x6C, 0x6C, 0x53, 0x74, 0x61, 0x72, 0x74, 0x4D, 0x65, 0x6E, 0x75, 0x2E, 0x63, 0x72, 0x6F, 0x00 }, 0x400000, 0) + 0x17;
+            if (data.Length % 0x200 != 0) { WinFormsUtil.Alert(".code.bin not decompressed. Aborting."); Close(); }
+            offset = GetDataOffset(data);
             codebin = files[0];
             itemlist[0] = "";
             setupDGV();
@@ -23,8 +23,32 @@ namespace pk3DS
             CB_Location.SelectedIndex = 0;
         }
 
+        private static int GetDataOffset(byte[] data)
+        {
+            byte[] vanilla =
+            {
+                0x00, 0x72, 0x6F, 0x6D, 0x3A, 0x2F, 0x44, 0x6C, 0x6C, 0x53, 0x74, 0x61, 0x72, 0x74, 0x4D, 0x65,
+                0x6E, 0x75, 0x2E, 0x63, 0x72, 0x6F, 0x00
+            };
+            int offset = Util.IndexOfBytes(data, vanilla, 0x400000, 0);
+            if (offset >= 0)
+                return offset + vanilla.Length;
+
+            byte[] patched =
+            {
+                0x00, 0x72, 0x6F, 0x6D, 0x32, 0x3A, 0x2F, 0x44, 0x6C, 0x6C, 0x53, 0x74, 0x61, 0x72, 0x74, 0x4D,
+                0x65, 0x6E, 0x75, 0x2E, 0x63, 0x72, 0x6F, 0x00, 0xFF
+            };
+            offset = Util.IndexOfBytes(data, patched, 0x400000, 0);
+
+            if (offset >= 0)
+                return offset + patched.Length;
+
+            return -1;
+        }
+
         private readonly string codebin;
-        private readonly string[] itemlist = Main.getText(TextName.ItemNames);
+        private readonly string[] itemlist = Main.Config.getText(TextName.ItemNames);
         private readonly byte[] data;
 
         private readonly byte[] entries = Main.Config.ORAS
@@ -52,7 +76,7 @@ namespace pk3DS
                 3, // Balls
             };
 
-        private readonly int offset = Main.Config.ORAS ? 0x0047AB58 : 0x0043C89E;
+        private readonly int offset;
         private int dataoffset;
 
         readonly string[] locations = Main.Config.ORAS
@@ -147,7 +171,7 @@ namespace pk3DS
         }
         private void B_Randomize_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes != Util.Prompt(MessageBoxButtons.YesNoCancel, "Randomize mart inventories?"))
+            if (DialogResult.Yes != WinFormsUtil.Prompt(MessageBoxButtons.YesNoCancel, "Randomize mart inventories?"))
                 return;
 
             int[] validItems = Randomizer.getRandomItemList();
@@ -155,7 +179,7 @@ namespace pk3DS
             int ctr = 0;
             Util.Shuffle(validItems);
 
-            bool specialOnly = DialogResult.Yes == Util.Prompt(MessageBoxButtons.YesNo, "Randomize only special marts?", "Will leave regular necessities intact.");
+            bool specialOnly = DialogResult.Yes == WinFormsUtil.Prompt(MessageBoxButtons.YesNo, "Randomize only special marts?", "Will leave regular necessities intact.");
             int start = specialOnly ? 9 : 0;
             for (int i = start; i < CB_Location.Items.Count; i++)
             {
@@ -167,6 +191,7 @@ namespace pk3DS
                     Util.Shuffle(validItems); ctr = 0;
                 }
             }
+            WinFormsUtil.Alert("Randomized!");
         }
     }
 }

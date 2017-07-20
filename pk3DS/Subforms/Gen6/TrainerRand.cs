@@ -18,8 +18,8 @@ namespace pk3DS
             trClassnorep.Sort();
         }
 
-        private string[] trName = Main.getText(TextName.TrainerNames);
-        private readonly string[] trClass = Main.getText(TextName.TrainerClasses);
+        private string[] trName = Main.Config.getText(TextName.TrainerNames);
+        private readonly string[] trClass = Main.Config.getText(TextName.TrainerClasses);
         private readonly List<string> trClassnorep;
 
         private void B_Close_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace pk3DS
             RSTE.sL = Randomizer.getSpeciesList(CHK_G1.Checked, CHK_G2.Checked, CHK_G3.Checked, CHK_G4.Checked, CHK_G5.Checked, CHK_G6.Checked, false, CHK_L.Checked, CHK_E.Checked, ModifierKeys == Keys.Control);
             RSTE.rSmart = CHK_BST.Checked;
             RSTE.rLevel = CHK_Level.Checked;
-            RSTE.rLevelPercent = NUD_Level.Value;
+            RSTE.rLevelMultiplier = NUD_Level.Value;
 
             RSTE.rMove = CB_Moves.SelectedIndex == 1;
             RSTE.rNoMove = CB_Moves.SelectedIndex == 2;
@@ -81,6 +81,9 @@ namespace pk3DS
             
             RSTE.rThemedClasses = new bool[trClass.Length];
 
+            if (WinFormsUtil.Prompt(MessageBoxButtons.YesNo, "Randomize all? Cannot undo.", "Double check Randomization settings before continuing.") != DialogResult.Yes) return;
+            if (!CHK_IgnoreSpecialClass.Checked)
+                if (WinFormsUtil.Prompt(MessageBoxButtons.YesNo, "Ignoring Special Trainer Classes has the chance of crashing your game in some battles!", "Continue anyway?") != DialogResult.Yes) return;
             RSTE.rDoRand = true;
             Close();
         }
@@ -100,7 +103,6 @@ namespace pk3DS
         private void CHK_Level_CheckedChanged(object sender, EventArgs e)
         {
             NUD_Level.Enabled = CHK_Level.Checked;
-            NUD_Level.Value = Convert.ToDecimal(CHK_Level.Checked) * 50;
         }
         private void changeLevelPercent(object sender, EventArgs e)
         {
